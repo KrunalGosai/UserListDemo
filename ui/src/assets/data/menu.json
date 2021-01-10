@@ -1,0 +1,10 @@
+{
+  "menu": [
+    {
+      "route": "users",
+      "name": "userlist",
+      "type": "link",
+      "icon": "dashboard"
+    }
+  ]
+}

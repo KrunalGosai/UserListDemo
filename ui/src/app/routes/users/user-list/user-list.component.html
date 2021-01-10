@@ -1,0 +1,67 @@
+<page-header title="User List"></page-header>
+
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Filter
+        </mat-panel-title>
+        <mat-panel-description>
+          Filter User List
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="fitlerForm">
+        <div fxFlex="100" class="matero-col">
+        <mat-form-field class="m-r-8" fxFlex="25">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="first_name">
+        </mat-form-field>
+
+        <mat-form-field class="m-r-8" fxFlex="25">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="last_name">
+        </mat-form-field>
+
+        <mat-form-field class="m-r-8" fxFlex="25">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" type="email" formControlName="email">
+        </mat-form-field>
+      </div>
+      </form>
+      <button mat-raised-button color="primary" (click)="filterList()" class="m-t-8">Filter</button>
+      <button mat-raised-button (click)="resetFilter()" class="m-t-8">Reset</button>
+      
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="first_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+        <td mat-cell style="max-width: 100px" *matCellDef="let row">{{ row.first_name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+        <td mat-cell style="max-width: 100px" *matCellDef="let row">{{ row.last_name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell style="max-width: 100px" *matCellDef="let row">{{ row.email }}</td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+    </table>
+  
+    <mat-paginator
+      (page)="pageEvent($event)"
+      [length]="pageDetails.totalRecords"
+      [pageSize]="pageDetails.itemsPerPage"
+      [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    
+  </div>
+  
